@@ -1,11 +1,19 @@
 var express = require('express');
-var socket = require('socket.io')
+var socket = require('socket.io');
+var http = require('http');
+
+http.createServer(function(req, res){
+    res.writeHead(200, {'Content-Type':'text/plain'});
+    res.end('Hello World!');
+}).listen(8080);
 
 //App setup
 var app = express();
 var server = app.listen(4000, function(){
     console.log('Listening to requests on port 4000')
 });
+
+
 
 //Static files
 app.use(express.static('public'));
