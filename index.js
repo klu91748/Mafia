@@ -1,11 +1,5 @@
 var express = require('express');
 var socket = require('socket.io');
-var http = require('http');
-
-http.createServer(function(req, res){
-    res.writeHead(200, {'Content-Type':'text/plain'});
-    res.end('Hello World!');
-}).listen(8080);
 
 //App setup
 var app = express();
