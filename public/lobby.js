@@ -1,5 +1,5 @@
 //Make connection
-var socket = io.connect('http://localhost:4000');
+var socket = io.connect('34.217.207.110');
 
 //Query DOM
 var createRoomButton = document.getElementsByClassName('btn btn-primary')[0],
