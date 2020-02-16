@@ -1,16 +1,29 @@
-var express = require('express');
-var socket = require('socket.io');
+const express = require('express');
+const socket = require('socket.io');
+//const mongoose = require('mongoose');
 
 //App setup
-var app = express();
-var server = app.listen(80, function(){
+const app = express();
+const port = process.env.PORT || 80;
+const server = app.listen(port, function(){
     console.log('Listening to requests on port 80')
 });
 
-
-
 //Static files
 app.use(express.static('public'));
+
+/*Connect to database
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri,
+    {
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+});
+mongoose.connection.once('open', function(){
+    console.log('Connection to database has been established.');
+});
+*/
 
 //Socket setup and pass server
 var io = socket(server);
@@ -63,9 +76,11 @@ io.on('connection', function(socket){
         var name = [];
 
         for (var i=1; i<=length-1; i++){
-            if (i == 7) role.push("Jester");
-            else if (i%3==1 || i%3==2) role.push("Citizen");
+            if (i==7) role.push("Jester");
+            else if (i==4) role.push("Nurse");
+            else if (i==5) role.push("Officer");
             else if (i%3==0) role.push("Mafia");
+            else role.push("Citizen");
         }
         role = shuffle(role);
         
